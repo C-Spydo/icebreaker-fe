@@ -35,94 +35,55 @@ export const NavigationItems: NavigationItem[] = [
   },
   {
     id: 'page',
-    title: 'Pages',
+    title: 'Menu',
     type: 'group',
     icon: 'icon-navigation',
     children: [
       {
-        id: 'Authentication',
-        title: 'Authentication',
+        id: 'Prospects',
+        title: 'Prospects',
+        type: 'collapse',
+        icon: 'ti ti-key',
+        children: [
+          {
+            id: 'view-prospects',
+            title: 'View Prospects',
+            type: 'item',
+            url: '/prospects',
+            breadcrumbs: false
+          },
+          {
+            id: 'add-prospect',
+            title: 'Add Prospect',
+            type: 'item',
+            url: '/add-prospect',
+            breadcrumbs: false
+          }
+        ]
+      },
+      {
+        id: 'Emails',
+        title: 'Emails',
         type: 'collapse',
         icon: 'ti ti-key',
         children: [
           {
             id: 'login',
-            title: 'Login',
+            title: 'Generate Email',
             type: 'item',
-            url: '/guest/login',
-            target: true,
+            url: '/generate-email',
             breadcrumbs: false
           },
           {
             id: 'register',
-            title: 'Register',
+            title: 'Mailing History',
             type: 'item',
-            url: '/guest/register',
-            target: true,
+            url: '/mailing-history',
             breadcrumbs: false
           }
         ]
       }
     ]
   },
-  {
-    id: 'elements',
-    title: 'Elements',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'typography',
-        title: 'Typography',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/typography',
-        icon: 'ti ti-typography'
-      },
-      {
-        id: 'color',
-        title: 'Colors',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/color',
-        icon: 'ti ti-brush'
-      },
-      {
-        id: 'tabler',
-        title: 'Tabler',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://tabler-icons.io/',
-        icon: 'ti ti-plant-2',
-        target: true,
-        external: true
-      }
-    ]
-  },
-  {
-    id: 'other',
-    title: 'Other',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'sample-page',
-        title: 'Sample Page',
-        type: 'item',
-        url: '/sample-page',
-        classes: 'nav-item',
-        icon: 'ti ti-brand-chrome'
-      },
-      {
-        id: 'document',
-        title: 'Document',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://codedthemes.gitbook.io/berry-angular/',
-        icon: 'ti ti-vocabulary',
-        target: true,
-        external: true
-      }
-    ]
-  }
+
 ];

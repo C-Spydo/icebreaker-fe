@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Add New Prospect">
+      <form #prospectForm="ngForm" (ngSubmit)="addProspect()" novalidate>
+        
+        <!-- Company Name -->
+        <div class="mb-3">
+          <label for="companyName" class="form-label">Company Name</label>
+          <input type="text" id="companyName" class="form-control" [(ngModel)]="prospect.company_name" name="company_name" required #companyName="ngModel" />
+          <div *ngIf="companyName.invalid && companyName.touched" class="text-danger">Company name is required.</div>
+        </div>
+
+        <!-- Industry Dropdown -->
+        <div class="mb-3">
+          <label for="industry" class="form-label">Industry</label>
+          <select id="industry" class="form-control" [(ngModel)]="prospect.industry_id" name="industry_id" required #industry="ngModel">
+            <option value="">Select Industry</option>
+            <option *ngFor="let industry of industries" [value]="industry.id">{{ industry.name }}</option>
+          </select>
+          <div *ngIf="industry.invalid && industry.touched" class="text-danger">Industry selection is required.</div>
+        </div>
+
+        <!-- Contact Name -->
+        <div class="mb-3">
+          <label for="contactName" class="form-label">Contact Name</label>
+          <input type="text" id="contactName" class="form-control" [(ngModel)]="prospect.contact_name" name="contact_name" required #contactName="ngModel" />
+          <div *ngIf="contactName.invalid && contactName.touched" class="text-danger">Contact name is required.</div>
+        </div>
+
+        <!-- Contact Email -->
+        <div class="mb-3">
+          <label for="contactEmail" class="form-label">Contact Email</label>
+          <input type="email" id="contactEmail" class="form-control" [(ngModel)]="prospect.contact_email" name="contact_email" required #contactEmail="ngModel" />
+          <div *ngIf="contactEmail.invalid && contactEmail.touched" class="text-danger">Valid email is required.</div>
+        </div>
+
+        <!-- Contact Phone -->
+        <div class="mb-3">
+          <label for="contactPhone" class="form-label">Contact Phone</label>
+          <input type="text" id="contactPhone" class="form-control" [(ngModel)]="prospect.contact_phone" name="contact_phone" required #contactPhone="ngModel" />
+          <div *ngIf="contactPhone.invalid && contactPhone.touched" class="text-danger">Contact phone is required.</div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary" [disabled]="prospectForm.invalid">Add Prospect</button>
+      </form>
+    </app-card>
+  </div>
+</div>
