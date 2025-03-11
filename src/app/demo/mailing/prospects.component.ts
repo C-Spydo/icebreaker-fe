@@ -28,7 +28,7 @@ export default class ProspectPageComponent {
   }
 
   loadProspects() {
-    this.prospectService.fetchProspects().subscribe({
+    this.prospectService.getProspects().subscribe({
       next: (data) => {
         this.prospects = data;
         console.log(this.prospects);

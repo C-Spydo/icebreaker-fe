@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-sm-6">
+    <app-card cardTitle="Generate Prospect Mail">
+      <form #mailForm="ngForm" (ngSubmit)="generateMail()" novalidate>
+
+        <div class="mb-3">
+          <label for="prospect" class="form-label">Prospect</label>
+          <select id="prospect" class="form-control" [(ngModel)]="selectedProspectId" name="prospect_id" required #prospect="ngModel" (change)="loadProspectDetails()">
+            <option value="">Select Prospect</option>
+            <option *ngFor="let prospect of prospects" [value]="prospect.id">{{ prospect.company_name }}</option>
+          </select>
+          <div *ngIf="prospect.invalid && prospect.touched" class="text-danger">Prospect selection is required.</div>
+        </div>
+
+        <!-- Prospect Details Card -->
+        <app-card *ngIf="selectedProspect" cardTitle="Prospect Details">
+          <p><strong>Company:</strong> {{ selectedProspect.company_name }}</p>
+          <p><strong>Industry:</strong> {{ selectedProspect.industry_name }}</p>
+          <p><strong>Contact Name:</strong> {{ selectedProspect.contact_name }}</p>
+          <p><strong>Phone:</strong> {{ selectedProspect.contact_phone }}</p>
+          <p><strong>Email:</strong> {{ selectedProspect.contact_email }}</p>
+        </app-card>
+
+        <!-- Generate Mail Button -->
+        <button type="submit" class="btn btn-primary" [disabled]="mailForm.invalid">Generate Mail</button>
+      </form>
+    </app-card>
+  </div>
+
+  <!-- Mail Content Section -->
+  <div class="col-sm-6 mt-4" *ngIf="mailContent">
+    <app-card cardTitle="Generated Mail">
+      <textarea class="form-control" rows="5" [(ngModel)]="mailContent"></textarea>      
+      <div class="mt-3">
+        <button class="btn btn-warning me-2" (click)="generateMail()">Regenerate</button>
+        <button class="btn btn-success" (click)="sendMail()">Send Mail</button>
+      </div>
+    </app-card>
+  </div>
+</div>

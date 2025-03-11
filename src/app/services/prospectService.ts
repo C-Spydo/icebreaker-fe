@@ -22,7 +22,7 @@ export class ProspectService {
 
   constructor(private http: HttpClient) {}
 
-  getProspects(): Observable<any> {
+  fetchProspects(): Observable<any> {
     return this.http.get<{ data: any }>(`${this.apiUrl}/prospects`).pipe(
       map((response) => response.data)
     );

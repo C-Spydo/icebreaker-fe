@@ -36,6 +36,10 @@ const routes: Routes = [
       {
         path: 'add-prospect',
         loadComponent: () => import('./demo/prospects/add-prospect.component')
+      },
+      {
+        path: 'generate-email',
+        loadComponent: () => import('./demo/mailing/generate-mail.component')
       }
     ]
   },
