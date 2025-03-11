@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProspectService } from '../../services/prospectService';
@@ -15,7 +15,8 @@ import { showNotification } from '../utils/notification';
   standalone: true,
   imports: [CommonModule, FormsModule, CardComponent,  NgSelectModule, FormsModule, ],
   templateUrl: './generate-mail.component.html',
-  styleUrls: ['./generate-mail.component.scss']
+  styleUrls: ['./generate-mail.component.scss'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export default class GenerateMailPageComponent {
   prospects = [
@@ -26,6 +27,7 @@ export default class GenerateMailPageComponent {
   selectedProspectId: number | null = null;
   selectedProspect: any = null;
   mailContent: string = "";
+  isEditorEnabled = false;
 
   constructor(private prospectService: ProspectService, private mailService: MailService) {}
   
@@ -38,10 +40,19 @@ export default class GenerateMailPageComponent {
     this.selectedProspect = this.prospects.find(p => p.id == this.selectedProspectId) || null;
   }
 
-  updateMailContent(event: any) {
-    this.mailContent = event.target.innerHTML;
+  initializeEditor(event: any) {
+    const editor = event.target; // Get the Trix editor instance
+    editor.editor.setSelectedRange([0, 0]); // Move cursor to the start
+    editor.editor.insertHTML(this.mailContent); // Inject initial content
   }
-  
+
+  updateMailContent(event: any) {
+    this.mailContent = event.target.value;
+    const editor = event.target;
+    editor.style.height = "auto";
+    editor.style.height = editor.scrollHeight + "px"; // Auto-expands
+  }
+
   fetchProspects(){
     this.prospectService.fetchProspects().subscribe({
       next: (data) => {
@@ -56,11 +67,13 @@ export default class GenerateMailPageComponent {
 
   generateMail() {
     this.mailContent = "Here is a content";
+    this.isEditorEnabled = true;
     return;
     this.mailService.generateMail(this.selectedProspectId).subscribe({
       next: (data) => {
         console.log(data);
         // this.mailContent = data.content
+        this.isEditorEnabled = true;
         showNotification(false,'Email generated successfully')
       },
       error: (err) => {
@@ -71,16 +84,18 @@ export default class GenerateMailPageComponent {
   }
 
   sendMail() {
+    console.log(this.mailContent);
+    console.log(this.selectedProspectId);
     if (!this.selectedProspectId || !this.mailContent) return;
 
     this.mailService.sendMail(this.selectedProspectId, this.mailContent).subscribe({
       next: (data) => {
         console.log(data);
-        showNotification(false,'Email generated successfully')
+        showNotification(false,'Email Sent successfully')
       },
       error: (err) => {
         console.error('Error adding prospect:', err);
-        showNotification(false,'Failed to generate email')
+        showNotification(false,'Failed to Send email')
       }
     });
   }

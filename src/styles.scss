@@ -41,3 +41,18 @@ File: style.css
 @import url('scss/fonts/berry/berry-icons.css'); /** custom font icons - berry **/
 @import 'scss/fonts/tabler-icons.min.css';
 @import 'scss/fonts/phosphor/duotone/style.css';
+@import "trix/dist/trix.css";
+
+
+trix-editor {
+    min-height: 200px; /* Set initial height */
+    max-height: 500px; /* Optional max height */
+    width: 100%; /* Make it take full width */
+    resize: vertical; /* Enable vertical resizing */
+    overflow-y: auto; /* Enable scrolling */
+    border: 1px solid #ccc; /* Optional border styling */
+    padding: 10px;
+    border-radius: 5px; /* Optional rounded edges */
+    background: #fff;
+    overflow: hidden; /* Hide scroll until needed */
+  }

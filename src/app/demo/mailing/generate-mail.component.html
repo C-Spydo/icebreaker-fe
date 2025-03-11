@@ -30,7 +30,15 @@
   <!-- Mail Content Section -->
   <div class="col-sm-6 mt-4" *ngIf="mailContent">
     <app-card cardTitle="Generated Mail">
-      <textarea class="form-control" rows="5" [(ngModel)]="mailContent"></textarea>      
+      <!-- <textarea class="form-control" rows="5" [(ngModel)]="mailContent"></textarea>    -->
+      <input id="editor" type="hidden" [(ngModel)]="mailContent" name="mailContent">
+      <trix-editor 
+        input="editor" 
+        (trix-initialize)="initializeEditor($event)"
+        (trix-change)="updateMailContent($event)" 
+        [attr.contenteditable]="isEditorEnabled ? 'true' : 'false'"
+        [class.disabled-editor]="!isEditorEnabled">
+     </trix-editor>
       <div class="mt-3">
         <button class="btn btn-warning me-2" (click)="generateMail()">Regenerate</button>
         <button class="btn btn-success" (click)="sendMail()">Send Mail</button>
