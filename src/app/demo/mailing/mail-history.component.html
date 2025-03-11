@@ -1,0 +1,66 @@
+<!-- Table -->
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Prospect</th>
+        <th>Title</th>
+        <th>Date/Time</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mail of mails; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ mail.prospect }}</td>
+        <td>{{ mail.title }}</td>
+        <td>{{ mail.date | date: 'MMM d, y h:mm a' }}</td>
+        <td>
+          <span [ngClass]="{'text-success': mail.status === 'Sent', 'text-warning': mail.status === 'Pending'}">
+            {{ mail.status }}
+          </span>
+        </td>
+        <td>
+          <a (click)="openMailModal(mail)" class="me-2 text-primary" title="View">
+            <i class="ti ti-eye"></i>
+          </a>
+          <a (click)="callProspect(mail)" class="text-success" title="Call">
+            <i class="ti ti-phone"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Mail Details Modal -->
+<div class="modal fade" id="mailDetailsModal" tabindex="-1" aria-labelledby="mailDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="mailDetailsModalLabel">Mail Details</h5> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-card cardTitle="Mail Details">
+          <p><strong>Prospect:</strong> {{ selectedMail?.prospect }}</p>
+          <p><strong>Title:</strong> {{ selectedMail?.title }}</p>
+          <p><strong>Date/Time:</strong> {{ selectedMail?.date | date: 'MMM d, y h:mm a' }}</p>
+          <hr>
+          <p><strong>Content:</strong></p>
+          <div [innerHTML]="selectedMail?.content"></div>
+        </app-card>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="ti ti-x me-1"></i> Close
+        </button>
+        <button type="button" class="btn btn-success" (click)="callProspect(selectedMail)">
+          <i class="ti ti-phone-call me-1"></i> Call Prospect
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

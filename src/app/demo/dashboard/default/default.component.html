@@ -12,7 +12,7 @@
           </div>
         </div>
         <span class="text-white d-block f-34 f-w-500 my-2">
-          500
+          {{stats.total_emails}}
           <i class="ti ti-circle-arrow-up-right opacity-50"></i>
         </span>
         <p class="mb-0 opacity-50">Total Mails</p>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <span class="text-white d-block f-34 f-w-500 my-2">
-          17
+          {{stats.total_prospects}}
           <i class="ti ti-circle-arrow-up-right opacity-50"></i>
         </span>
         <p class="mb-0 opacity-50">Total Prospects</p>
@@ -47,7 +47,7 @@
             <i class="text-white ti ti-layout-board-split f-24"></i>
           </div>
           <div class="ms-2">
-            <h4 class="text-white f-w-600 mb-1">17</h4>
+            <h4 class="text-white f-w-600 mb-1">{{stats.total_cold_calls}}</h4>
             <p class="mb-0 opacity-50 text-sm">Cold Calls</p>
           </div>
         </div>
@@ -60,7 +60,7 @@
             <i class="text-warning ti ti-layout-board-split f-24"></i>
           </div>
           <div class="ms-2">
-            <h4 class="f-w-600 mb-1">Alive</h4>
+            <h4 class="f-w-600 mb-1">{{stats.api_status}}</h4>
             <p class="mb-0 opacity-50 text-sm">API Status</p>
           </div>
         </div>

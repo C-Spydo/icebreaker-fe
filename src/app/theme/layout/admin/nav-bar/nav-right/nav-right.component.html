@@ -8,7 +8,7 @@
           href="javascript:"
           ngbDropdownToggle
         >
-          <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar" />
+        <img [src]="payload?.picture || 'assets/images/default-avatar.png'" alt="user-image" class="user-avatar" />
           <span>
             <i class="ti ti-settings"></i>
           </span>
@@ -16,10 +16,10 @@
         <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
           <div class="dropdown-header">
             <h4>
-              Good Morning,
-              <span class="small text-muted">John Doe</span>
+              Hello,
+              <span class="small text-muted">{{name}}</span>
             </h4>
-            <p class="text-muted">Project Admin</p>
+            <p class="text-muted">({{email}})</p>
             <hr />
             <ng-scrollbar style="height: calc(100vh - 280px)" visibility="hover">
               <div class="upgradeplan-block bg-light-warning rounded">
@@ -35,7 +35,7 @@
               </div>
               <hr />
               <hr />
-              <a [routerLink]="['/guest/login']" class="dropdown-item">
+              <a (click)="logout()" class="dropdown-item">
                 <i class="ti ti-logout"></i>
                 <span>Logout</span>
               </a>

@@ -110,7 +110,9 @@
               "node_modules/trix/dist/trix.css"
             ],
             "scripts": [
-              "node_modules/trix/dist/trix.umd.js"
+              "node_modules/trix/dist/trix.umd.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "https://accounts.google.com/gsi/client"
             ]
           }
         },

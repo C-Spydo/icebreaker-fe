@@ -56,3 +56,39 @@ trix-editor {
     background: #fff;
     overflow: hidden; /* Hide scroll until needed */
   }
+
+  a {
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    opacity: 0.8;
+  }
+
+  .user-avatar {
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Ensure it's a square */
+    border-radius: 50%; /* Makes it a circle */
+    object-fit: cover; /* Ensures the image covers the entire area */
+  }
+
+  .b-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem; /* Make text larger */
+    font-weight: 700; /* Bold text */
+    text-transform: uppercase; /* Optional: Uppercase for a logo feel */
+    letter-spacing: 1px; /* Slight spacing */
+  }
+  
+  .logo-icon {
+    font-size: 2.5rem; /* Make icon larger */
+  }
+  
+  .logo-text {
+    font-size: 1.2rem; /* Larger text */
+    font-weight: 800; /* Extra bold */
+    margin-left: 8px; /* Space between icon and text */
+  }
+  

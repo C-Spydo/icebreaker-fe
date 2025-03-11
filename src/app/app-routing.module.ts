@@ -10,11 +10,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/default',
+        redirectTo: '/dashboard',
         pathMatch: 'full'
       },
       {
-        path: 'default',
+        path: 'dashboard',
         loadComponent: () => import('./demo/dashboard/default/default.component').then((c) => c.DefaultComponent)
       },
       {
@@ -40,6 +40,10 @@ const routes: Routes = [
       {
         path: 'generate-email',
         loadComponent: () => import('./demo/mailing/generate-mail.component')
+      },
+      {
+        path: 'mail-history',
+        loadComponent: () => import('./demo/mailing/mail-history.component')
       }
     ]
   },
@@ -48,7 +52,7 @@ const routes: Routes = [
     component: GuestComponent,
     children: [
       {
-        path: 'guest',
+        path: '',
         loadChildren: () => import('./demo/pages/authentication/authentication.module').then((m) => m.AuthenticationModule)
       }
     ]

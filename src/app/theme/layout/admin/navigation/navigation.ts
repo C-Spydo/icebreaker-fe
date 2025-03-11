@@ -23,11 +23,11 @@ export const NavigationItems: NavigationItem[] = [
     icon: 'icon-navigation',
     children: [
       {
-        id: 'default',
+        id: 'dashboard',
         title: 'Dashboard',
         type: 'item',
         classes: 'nav-item',
-        url: '/default',
+        url: '/dashboard',
         icon: 'ti ti-dashboard',
         breadcrumbs: false
       }
@@ -68,18 +68,18 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'ti ti-key',
         children: [
           {
-            id: 'login',
+            id: 'generate-email',
             title: 'Generate Email',
             type: 'item',
             url: '/generate-email',
             breadcrumbs: false
           },
           {
-            id: 'register',
+            id: 'Mailing History',
             title: 'Mailing History',
             type: 'item',
-            url: '/mailing-history',
-            breadcrumbs: false
+            url: '/mail-history',
+            breadcrumbs: true
           }
         ]
       }
