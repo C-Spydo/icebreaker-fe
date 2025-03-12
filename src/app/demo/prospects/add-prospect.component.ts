@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProspectService } from '../../services/prospectService';
 import { NgSelectModule } from '@ng-select/ng-select';
-import Swal from 'sweetalert2';
+import { showNotification } from 'src/app/demo/utils/notification';
+import { Router } from '@angular/router';
 
 // Project Import
 import { CardComponent } from '../../theme/shared/components/card/card.component';
@@ -25,12 +26,12 @@ export default class AddProspectPageComponent {
     contact_name: '',
     contact_email: '',
     contact_phone: '',
-    industry_id: ''
+    industry_id: 0
   };
 
 
 
-  constructor(private prospectService: ProspectService) {}
+  constructor(private prospectService: ProspectService,  private router:Router) {}
 
   ngOnInit() {
     this.fetchIndustries();
@@ -51,28 +52,11 @@ export default class AddProspectPageComponent {
   addProspect() {
     this.prospectService.addProspect(this.prospect).subscribe({
       next: (data) => {
-        console.log(data);
-        Swal.fire({
-          title: 'Success!',
-          text: 'Prospect added successfully',
-          icon: 'success',
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000
-        });
+        showNotification(true, 'Prospect added successfully');
+        this.router.navigate(['/prospects']);
       },
       error: (err) => {
-        console.error('Error adding prospect:', err);
-        Swal.fire({
-          title: 'Error!',
-          text: 'Failed to add prospect',
-          icon: 'error',
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000
-        });
+        showNotification(false, 'Failed to add prospect:');
       }
     });
   }

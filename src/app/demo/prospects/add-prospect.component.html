@@ -15,7 +15,7 @@
           <label for="industry" class="form-label">Industry</label>
           <select id="industry" class="form-control" [(ngModel)]="prospect.industry_id" name="industry_id" required #industry="ngModel">
             <option value="">Select Industry</option>
-            <option *ngFor="let industry of industries" [value]="industry.id">{{ industry.name }}</option>
+            <option *ngFor="let industry of industries" [ngValue]="industry.id">{{ industry.name }}</option>
           </select>
           <div *ngIf="industry.invalid && industry.touched" class="text-danger">Industry selection is required.</div>
         </div>

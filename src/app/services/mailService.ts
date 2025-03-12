@@ -15,16 +15,22 @@ export class MailService {
   constructor(private http: HttpClient) {}
 
   fetchMails(): Observable<any> {
-    return this.http.get<{ data: any }>(`${this.apiUrl}/mails`).pipe(
+    return this.http.get<{ data: any }>(`${this.apiUrl}/emails`).pipe(
       map((response) => response.data)
     );
   }
 
   generateMail(prospect_id: number): Observable<any> {
-    return this.http.post<{ data: any }>(`${this.baseUrl}/generate_mail`, { prospect_id }).pipe(
-      map(response => response.data) 
+    return this.http.get<{ data: any }>(`${this.apiUrl}/emails/generate`).pipe(
+      map((response) => response.data)
     );
   }
+
+  // generateMail(prospect_id: number): Observable<any> {
+  //   return this.http.post<{ data: any }>(`${this.baseUrl}/emails/generate`, { prospect_id }).pipe(
+  //     map(response => response.data) 
+  //   );
+  // }
 
   sendMail(prospect_id: number, content: string): Observable<any> {
     return this.http.post<{ data: any }>(`${this.baseUrl}/send_mail`, { prospect_id, content }).pipe(

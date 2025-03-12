@@ -19,21 +19,22 @@ import { showNotification } from '../utils/notification';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export default class GenerateMailPageComponent {
-  prospects = [
-    { id: 1, company_name: "ABC Ltd", industry_name: "Finance", contact_name: "John Doe", contact_phone: "1234567890", contact_email: "john@example.com" },
-    { id: 2, company_name: "XYZ Corp", industry_name: "Technology", contact_name: "Jane Smith", contact_phone: "0987654321", contact_email: "jane@example.com" }
-  ];
+  // prospects = [
+  //   { id: 1, company_name: "ABC Ltd", industry_name: "Finance", contact_name: "John Doe", contact_phone: "1234567890", contact_email: "john@example.com" },
+  //   { id: 2, company_name: "XYZ Corp", industry_name: "Technology", contact_name: "Jane Smith", contact_phone: "0987654321", contact_email: "jane@example.com" }
+  // ];
   
   selectedProspectId: number | null = null;
   selectedProspect: any = null;
   mailContent: string = "";
   isEditorEnabled = false;
+  prospects: any[] = [];
 
   constructor(private prospectService: ProspectService, private mailService: MailService) {}
   
 
   ngOnInit() {
-    // this.fetchProspects();
+    this.fetchProspects();
   }
 
   loadProspectDetails() {
@@ -56,8 +57,7 @@ export default class GenerateMailPageComponent {
   fetchProspects(){
     this.prospectService.fetchProspects().subscribe({
       next: (data) => {
-        this.prospects = data;
-        console.log(this.prospects)
+        this.prospects = data.prospects;
       },
       error: (err) => {
         console.error('Error fetching prospects:', err);
@@ -66,15 +66,11 @@ export default class GenerateMailPageComponent {
   }
 
   generateMail() {
-    this.mailContent = "Here is a content";
-    this.isEditorEnabled = true;
-    return;
     this.mailService.generateMail(this.selectedProspectId).subscribe({
       next: (data) => {
-        console.log(data);
-        // this.mailContent = data.content
+        this.mailContent = data
         this.isEditorEnabled = true;
-        showNotification(false,'Email generated successfully')
+        showNotification(true,'Email generated successfully')
       },
       error: (err) => {
         console.error('Error adding prospect:', err);
@@ -91,7 +87,7 @@ export default class GenerateMailPageComponent {
     this.mailService.sendMail(this.selectedProspectId, this.mailContent).subscribe({
       next: (data) => {
         console.log(data);
-        showNotification(false,'Email Sent successfully')
+        showNotification(true,'Email Sent successfully')
       },
       error: (err) => {
         console.error('Error adding prospect:', err);

@@ -1,40 +1,49 @@
-<!-- Table -->
-<div class="table-responsive">
-  <table class="table table-hover table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Prospect</th>
-        <th>Title</th>
-        <th>Date/Time</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let mail of mails; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ mail.prospect }}</td>
-        <td>{{ mail.title }}</td>
-        <td>{{ mail.date | date: 'MMM d, y h:mm a' }}</td>
-        <td>
-          <span [ngClass]="{'text-success': mail.status === 'Sent', 'text-warning': mail.status === 'Pending'}">
-            {{ mail.status }}
-          </span>
-        </td>
-        <td>
-          <a (click)="openMailModal(mail)" class="me-2 text-primary" title="View">
-            <i class="ti ti-eye"></i>
-          </a>
-          <a (click)="callProspect(mail)" class="text-success" title="Call">
-            <i class="ti ti-phone"></i>
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Email History">
+      <!-- Search Input -->
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search Emails..." [(ngModel)]="searchTerm" />
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Prospect</th>
+              <th>Title</th>
+              <th>Date/Time</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mail of mails; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ mail.prospect }}</td>
+              <td>{{ mail.title }}</td>
+              <td>{{ mail.date | date: 'MMM d, y h:mm a' }}</td>
+              <td>
+                <span [ngClass]="{'text-success': mail.status === 'Sent', 'text-warning': mail.status === 'Pending'}">
+                  {{ mail.status }}
+                </span>
+              </td>
+              <td>
+                <a (click)="openMailModal(mail)" class="me-2 text-primary" title="View">
+                  <i class="ti ti-eye"></i>
+                </a>
+                <a (click)="callProspect(mail)" class="text-success" title="Call">
+                  <i class="ti ti-phone"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
 </div>
-
 <!-- Mail Details Modal -->
 <div class="modal fade" id="mailDetailsModal" tabindex="-1" aria-labelledby="mailDetailsModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -50,7 +59,7 @@
           <p><strong>Date/Time:</strong> {{ selectedMail?.date | date: 'MMM d, y h:mm a' }}</p>
           <hr>
           <p><strong>Content:</strong></p>
-          <div [innerHTML]="selectedMail?.content"></div>
+          <div [innerHTML]="selectedMail?.message"></div>
         </app-card>
       </div>
       <div class="modal-footer">

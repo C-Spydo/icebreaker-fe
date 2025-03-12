@@ -30,7 +30,7 @@ export default class ProspectPageComponent {
   loadProspects() {
     this.prospectService.fetchProspects().subscribe({
       next: (data) => {
-        this.prospects = data;
+        this.prospects = data.prospects;
         console.log(this.prospects);
       },
       error: (err) => {

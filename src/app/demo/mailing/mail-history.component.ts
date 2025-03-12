@@ -19,27 +19,10 @@ export default class MailHistoryPageComponent {
   sortAsc: boolean = true;
   mailModal: Modal | null = null;
 
-  // mails: any[] = [];
+  mails: any[] = [];
   
 
-  mails: any[] = [
-    {
-      id: 1,
-      prospect: 'John Doe (Acme Inc.)',
-      title: 'Proposal for Partnership',
-      date: new Date('2024-02-25T14:30:00'),
-      status: 'Sent',
-      content: 'Dear John, We are excited to present our partnership proposal...'
-    },
-    {
-      id: 2,
-      prospect: 'Jane Smith (Tech Solutions)',
-      title: 'Follow-up on Meeting',
-      date: new Date('2024-02-26T10:00:00'),
-      status: 'Pending',
-      content: 'Hi Jane, Just following up on our meeting last week regarding...'
-    }
-  ];
+
 
   constructor(private mailService: MailService) {}
 
@@ -54,7 +37,7 @@ export default class MailHistoryPageComponent {
   loadMails() {
     this.mailService.fetchMails().subscribe({
       next: (data) => {
-        this.mails = data;
+        this.mails = data.emails;
         console.log(this.mails);
       },
       error: (err) => {

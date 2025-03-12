@@ -29,7 +29,7 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard',
         icon: 'ti ti-dashboard',
-        breadcrumbs: false
+        breadcrumbs: true
       }
     ]
   },
@@ -50,14 +50,14 @@ export const NavigationItems: NavigationItem[] = [
             title: 'View Prospects',
             type: 'item',
             url: '/prospects',
-            breadcrumbs: false
+            breadcrumbs: true
           },
           {
             id: 'add-prospect',
             title: 'Add Prospect',
             type: 'item',
             url: '/add-prospect',
-            breadcrumbs: false
+            breadcrumbs: true
           }
         ]
       },
@@ -72,7 +72,7 @@ export const NavigationItems: NavigationItem[] = [
             title: 'Generate Email',
             type: 'item',
             url: '/generate-email',
-            breadcrumbs: false
+            breadcrumbs: true
           },
           {
             id: 'Mailing History',
