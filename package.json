@@ -4,6 +4,7 @@
   "author": "CodedThemes",
   "license": "MIT",
   "private": false,
+  "sideEffects": false,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
