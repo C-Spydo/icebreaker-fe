@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <app-card cardTitle="Generate Prospect Mail">
       <form #mailForm="ngForm" (ngSubmit)="generateMail()" novalidate>
 
@@ -15,7 +15,7 @@
         <!-- Prospect Details Card -->
         <app-card *ngIf="selectedProspect" cardTitle="Prospect Details">
           <p><strong>Company:</strong> {{ selectedProspect.company_name }}</p>
-          <p><strong>Industry:</strong> {{ selectedProspect.industry_name }}</p>
+          <p><strong>Industry:</strong> {{ selectedProspect.industry }}</p>
           <p><strong>Contact Name:</strong> {{ selectedProspect.contact_name }}</p>
           <p><strong>Phone:</strong> {{ selectedProspect.contact_phone }}</p>
           <p><strong>Email:</strong> {{ selectedProspect.contact_email }}</p>
@@ -31,9 +31,13 @@
   </div>
 
   <!-- Mail Content Section -->
-  <div class="col-sm-6 mt-4" *ngIf="mailContent">
-    <app-card cardTitle="Generated Mail">
-      <!-- <textarea class="form-control" rows="5" [(ngModel)]="mailContent"></textarea>    -->
+  <div class="col-sm-8">
+    <app-card cardTitle="Generated Mail" *ngIf="!isGeneratingMail && mailContent">
+      <div class="mb-3">
+        <label for="mailTitle" class="form-label">Mail Title</label>
+        <input type="text" id="mailTitle" class="form-control" [(ngModel)]="mailTitle" name="mailTitle" required>
+      </div>
+
       <input id="editor" type="hidden" [(ngModel)]="mailContent" name="mailContent">
       <trix-editor 
         input="editor" 
@@ -53,5 +57,10 @@
         
       </div>
     </app-card>
+
+    <div class="text-center mt-25" *ngIf="isGeneratingMail">
+      <p class="generating-text">Generating Email<span class="dot-flashing"></span></p>
+    </div>
+
   </div>
 </div>

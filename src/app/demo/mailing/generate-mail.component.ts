@@ -27,7 +27,9 @@ export default class GenerateMailPageComponent {
   selectedProspectId: number | null = null;
   selectedProspect: any = null;
   mailContent: string = "";
+  mailTitle: string = "";
   isEditorEnabled = false;
+  isGeneratingMail: boolean = false;
   prospects: any[] = [];
 
   constructor(private prospectService: ProspectService, private mailService: MailService) {}
@@ -66,9 +68,18 @@ export default class GenerateMailPageComponent {
   }
 
   generateMail() {
+    this.isGeneratingMail = true
     this.mailService.generateMail(this.selectedProspectId).subscribe({
       next: (data) => {
-        this.mailContent = data
+        this.mailTitle = data.email_title;
+        this.mailContent = data.email_body;
+        let userName = localStorage.getItem('name') || 'User'; // Fallback if name is missing
+
+        this.mailContent = this.mailContent
+          .replace(/\n/g, '<br>') // Convert new lines
+          .replace(/\[Your Name\]/g, userName); // Replace placeholder with stored name
+      
+        this.isGeneratingMail = false
         this.isEditorEnabled = true;
         showNotification(true,'Email generated successfully')
       },

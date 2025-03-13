@@ -21,7 +21,7 @@ export class MailService {
   }
 
   generateMail(prospect_id: number): Observable<any> {
-    return this.http.get<{ data: any }>(`${this.apiUrl}/emails/generate`).pipe(
+    return this.http.get<{ data: any }>(`${this.apiUrl}/emails/generate/${prospect_id}`).pipe(
       map((response) => response.data)
     );
   }

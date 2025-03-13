@@ -48,13 +48,13 @@ trix-editor {
     min-height: 200px; /* Set initial height */
     max-height: 500px; /* Optional max height */
     width: 100%; /* Make it take full width */
-    resize: vertical; /* Enable vertical resizing */
+    // resize: vertical; /* Enable vertical resizing */
     overflow-y: auto; /* Enable scrolling */
     border: 1px solid #ccc; /* Optional border styling */
     padding: 10px;
     border-radius: 5px; /* Optional rounded edges */
     background: #fff;
-    overflow: hidden; /* Hide scroll until needed */
+    // overflow: hidden; /* Hide scroll until needed */
   }
 
   a {
@@ -91,4 +91,62 @@ trix-editor {
     font-weight: 800; /* Extra bold */
     margin-left: 8px; /* Space between icon and text */
   }
+  
+  .text-success {
+    color: #28a745 !important;
+  }
+  
+  .text-warning {
+    color: #ffc107 !important;
+  }
+
+  .generating-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    animation: fadeInOut 1.5s infinite alternate;
+  }
+  
+  /* Dot Animation */
+  .dot-flashing {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .dot-flashing::before,
+  .dot-flashing::after,
+  .dot-flashing {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #007bff;
+    border-radius: 50%;
+    animation: dotBounce 1.5s infinite ease-in-out;
+  }
+  
+  .dot-flashing::before {
+    animation-delay: 0.3s;
+  }
+  
+  .dot-flashing::after {
+    animation-delay: 0.6s;
+  }
+  
+  /* Text Animation */
+  @keyframes fadeInOut {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  
+  /* Dot Bounce Animation */
+  @keyframes dotBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  
+
   
