@@ -32,8 +32,20 @@ export class MailService {
   //   );
   // }
 
-  sendMail(prospect_id: number, content: string): Observable<any> {
-    return this.http.post<{ data: any }>(`${this.baseUrl}/send_mail`, { prospect_id, content }).pipe(
+  sendMail(prospect_id: number | string, title: string, email_body: string): Observable<any> {
+    const id = Number(prospect_id); // Ensure it's a number
+  
+    if (isNaN(id)) {
+      throw new Error("Invalid prospect_id: must be a number.");
+    }
+  
+    return this.http.post<{ data: any }>(`${this.baseUrl}/emails`, { prospect_id: id, title, email_body }).pipe(
+      map(response => response.data)
+    );
+  }
+
+  resendMail(mail_id: number): Observable<any> {
+    return this.http.post<{ data: any }>(`${this.baseUrl}/emails/${mail_id}/resend`, {}).pipe(
       map(response => response.data) 
     );
   }

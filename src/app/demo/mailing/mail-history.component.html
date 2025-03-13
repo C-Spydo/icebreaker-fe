@@ -36,6 +36,11 @@
                 <a (click)="callProspect(mail)" class="text-success" title="Call">
                   <i class="ti ti-phone"></i>
                 </a>
+                <a (click)="resendMail(mail.id)" class="text-success" title="Call">
+                  <i class="ti ti-refresh"></i>
+                </a>
+
+                <!-- *ngIf="selectedMail?.status?.toLowerCase() === 'failed'"  -->
               </td>
             </tr>
           </tbody>
@@ -55,7 +60,6 @@
       <div class="modal-body">
         <app-card cardTitle="Mail Details">
           <p><strong>Prospect:</strong> {{ selectedMail?.company_name }}</p>
-          <p><strong>Title:</strong> {{ selectedMail?.title }}</p>
           <p><strong>Date/Time:</strong> {{ selectedMail?.created_at | date: 'MMM d, y h:mm a' }}</p>
           <hr>
           <p><strong>Title:</strong></p>

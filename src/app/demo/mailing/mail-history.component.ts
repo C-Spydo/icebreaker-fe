@@ -5,6 +5,7 @@ import { MailService } from '../../services/mailService';
 import { Modal } from 'bootstrap';
 // Project Import
 import { CardComponent } from '../../theme/shared/components/card/card.component';
+import { showNotification } from '../utils/notification';
 
 @Component({
   selector: 'prospect-page',
@@ -80,6 +81,17 @@ export default class MailHistoryPageComponent {
 
   closeMailModal() {
     this.mailModal?.hide();
+  }
+
+  resendMail(mail_id: number) {
+    this.mailService.resendMail(mail_id).subscribe({
+      next: (data) => {
+        showNotification(true,'Email ReSent successfully')
+      },
+      error: (err) => {
+        showNotification(false,'Failed to ReSend email')
+      }
+    });
   }
 
   callProspect(mail: any) {

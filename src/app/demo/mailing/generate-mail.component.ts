@@ -95,7 +95,7 @@ export default class GenerateMailPageComponent {
     console.log(this.selectedProspectId);
     if (!this.selectedProspectId || !this.mailContent) return;
 
-    this.mailService.sendMail(this.selectedProspectId, this.mailContent).subscribe({
+    this.mailService.sendMail(this.selectedProspectId, this.mailTitle, this.mailContent).subscribe({
       next: (data) => {
         console.log(data);
         showNotification(true,'Email Sent successfully')
