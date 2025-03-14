@@ -91,9 +91,11 @@ export default class GenerateMailPageComponent {
   }
 
   sendMail() {
-    console.log(this.mailContent);
-    console.log(this.selectedProspectId);
     if (!this.selectedProspectId || !this.mailContent) return;
+
+    this.mailContent = this.mailContent
+      .replace(/<\/?div>/g, '') // Remove all <div> and </div> tags
+      .replace(/<br\s*\/?>/g, '\n'); // Replace <br> with \n
 
     this.mailService.sendMail(this.selectedProspectId, this.mailTitle, this.mailContent).subscribe({
       next: (data) => {
